@@ -36,9 +36,9 @@ data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'w
 ```
 
 ## Demo
-![Screenshot of analysing results.](../assets/images/4-1.jpg)
-![Screenshot of analysing results.](../assets/images/4-2.jpg)
-![Screenshot of analysing results.](../assets/images/4-3.jpg)
+![Screenshot of analysing results.](../assets/images/4-1.JPG)
+![Screenshot of analysing results.](../assets/images/4-2.JPG)
+![Screenshot of analysing results.](../assets/images/4-3.JPG)
 
 ### Learning
 Learned Array.prototype.reduce(), Array.prototype.sort(), Array.prototype.map(), Array.prototype.filter() functions.
