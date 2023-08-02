@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Type Ahead 👀</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="https://fav.farm/🔥" />
+</head>
+<body>
+
+  <form class="search-form">
+    <input type="text" class="search" placeholder="City or State">
+    <ul class="suggestions">
+      <li>Filter for a city</li>
+      <li>or a state</li>
+    </ul>
+  </form>
+<script>
+const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+
+const cities = [];
+
+// const prom = fetch(endpoint)
+// console.log(prom) // return Promise
+
+// fetch(endpoint).then(blob => console.log(blob));
+// return Response, a blob of raw data, could be image, text, video, etc.
+
+fetch(endpoint)
+  .then(blob => blob.json())
+  // .then(data => console.log(data)) // would get array of 1000 cities
+  // .then(data => cities = data) // would get error, assignment to constant variables
+  //.then(data => cities.push(data)) // would get an array of 1000 arrays
+  .then(data => cities.push(...data)) // proper array of hashes, spread the arrays
+
+// test in console: findMatches('bos', cities) would return 2 results
+function findMatches(wordToMatch, cities) {
+  return cities.filter(place => {
+    // check if the city / state matches what was searched
+    const regex = new RegExp(wordToMatch, 'gi');
+    // g => global, look through entire string; i => insensitive
+    return place.city.match(regex) || place.state.match(regex)
+  })
+}
+
+function numberWithCommas(x) {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+
+function displayMatches() {
+  // console.log(this.value);
+  const matchArray = findMatches(this.value, cities);
+  // console.log(matchArray); // get the matched data
+  const html = matchArray.map(place => {
+    // replace the regex with hl(highlight, not h1) class
+    // console.log(this.value);
+    const regex = new RegExp(this.value, 'gi');
+    const cityName = place.city.replace(regex, `<span class="hl">${this.value}</span>`);
+    const stateName = place.state.replace(regex, `<span class="hl">${this.value}</span>`);
+    return `
+      <li>
+        <span class="name">${cityName},${stateName}</span>
+        <span class="population">${numberWithCommas(place.population)}</span>
+      </li>
+    `;
+    // change ${place.city} => ${cityName}; ${place.state} => ${stateName}
+    // change ${place.population} => ${numberWithCommas(place.population)}
+  }).join(''); // join the array => one string
+  suggestions.innerHTML = html;
+}
+
+const searchInput = document.querySelector('.search'); // select search bar
+const suggestions = document.querySelector('.suggestions'); // select results area
+
+searchInput.addEventListener('change', displayMatches);
+// change event only files when you go off that input (need to click outside)
+searchInput.addEventListener('keyup', displayMatches);
+</script>
+</body>
+</html>
