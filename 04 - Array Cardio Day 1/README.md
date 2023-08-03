@@ -2,6 +2,15 @@
 
 Use JS to sort arrays according to requirements. 
 
+## Learning
+```java
+Array.prototype.filter()
+Array.prototype.map()
+Array.prototype.sort()
+Array.prototype.reduce()
+Array.from() changes the Nodelist to an array
+```
+
 ## Data
 ```java
 // data to analyse
