@@ -6,7 +6,7 @@ let lastChecked;
 function handleCheck(e) {
   // console.log(e); // a PointerEvent when we click the checkboxes
   // lastChecked = this;
-  let inBetweeen = false;  // flag
+  let inBetween = false;  // flag
   // 1. when we click the first box, it became true
   // 2. when we hit the last box, it set to false, and it'll no longer check it
 
@@ -19,9 +19,9 @@ function handleCheck(e) {
       // this is the checkbox that we're clicking on!
       // lastChecked is the last checked checkbox
       if(checkbox === this || checkbox === lastChecked) {
-        inBetweeen = !inBetweeen;
+        inBetween = !inBetween;
         console.log('Starting to check them in between!');
-        console.log(inBetweeen);
+        console.log(inBetween);
       }
 
       if (inBetween) {
